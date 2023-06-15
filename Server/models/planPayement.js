@@ -1,8 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { clientSchema } from "./client.js";
 
 export const planPayementSchema = new Schema({
-    idClient: {
+    clientId: {
         type: Schema.Types.ObjectId,
         ref: "Client",
         required: true

@@ -32,7 +32,7 @@ export const paymentSchema = `#graphql
     }
 
     type Mutation {
-        createPayment(payementInput: PayementInput): Payement
+        createPayment(PayementInput: PayementInput): Payement
         updatePayment(id: ID!, payementInput: PayementInput): Payement
         deletePayment(id: ID!): Payement
     }
