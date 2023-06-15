@@ -14,7 +14,7 @@ export const planPayementResolvers = {
     Mutation: {
         createPlanPayement: async (_, { planPayementInput }) => {
             const planPayement = new planPayement({
-                idClient: planPayementInput.idClient,
+                clientId: planPayementInput.clientId,
                 typePlan: planPayementInput.typePlan,
             });
             return await planPayement.save();
@@ -25,7 +25,7 @@ export const planPayementResolvers = {
             if (!planPayement) {
                 throw new Error("planPayement not found");
             }
-            planPayement.idClient = planPayementInput.idClient;
+            planPayement.clientId = planPayementInput.clientId;
             planPayement.typePlan = planPayementInput.typePlan;
             return await planPayement.save();
         },

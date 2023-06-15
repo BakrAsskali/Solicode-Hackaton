@@ -1,9 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { clientSchema } from "./client.js";
-import { planPayementSchema } from "./planPayement.js";
 
 export const paymentSchema = new Schema({
-    idClient: {
+    clientId: {
         type: Schema.Types.ObjectId,
         ref: "Client",
         required: true
@@ -34,6 +32,10 @@ export const paymentSchema = new Schema({
         required: true
     },
     datePayement: {
+        type: Date,
+        required: true
+    },
+    subscriptionDate: {
         type: Date,
         required: true
     },

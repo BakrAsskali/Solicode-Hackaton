@@ -1,14 +1,14 @@
 export const planPayementSchema = `#graphql
     type PlanPayement {
         _id: ID!
-        idClient: String!
+        clientId: String!
         typePlan: String!
         createdAt: String!
         updatedAt: String!
     }
 
     input PlanPayementInput {
-        idClient: String!
+        clientId: String!
         typePlan: String!
     }
 

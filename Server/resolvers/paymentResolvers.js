@@ -1,5 +1,5 @@
 import { categoryChanger } from "../helpers/categories.js";
-import payment from "../models/payment.js";
+import { paymentSchema } from "../schema/paymentSchema.js";
 
 export const paymentResolvers = {
     Query: {
@@ -13,30 +13,27 @@ export const paymentResolvers = {
     },
 
     Mutation: {
-        createPayment: async (_, { paymentInput }) => {
-            const payment = new payment({
-                clientId: paymentInput.clientId,
-                amount: paymentInput.amount,
-                method: paymentInput.method,
-                planPayement: paymentInput.planPayement,
-                nbrAPayer: paymentInput.nbrAPayer,
-                paymentDate: paymentInput.paymentDate,
-                subscriptionDate: paymentInput.subscriptionDate,
+        createPayment: async (_, { payementInput }) => {
+            const payment = new paymentSchema({
+                clientId: payementInput.clientId,
+                montant: payementInput.amount,
+                modePayement: payementInput.method,
+                planPayement: payementInput.planPayement,
+                nbrPayementSuccess: payementInput.nbrPayementSuccess,
+                nbrdeRetard: payementInput.nbrdeRetard,
+                nbrAPayer: payementInput.nbrAPayer,
+                datePayement: payementInput.paymentDate,
+                subscriptionDate: payementInput.subscriptionDate,
             });
-            const paymentPlan = new paymentPlan({
-                idClient: paymentInput.clientId,
-                typePlan: paymentInput.planPayement.typePlan,
-            });
-            await paymentPlan.save();
             return await payment.save();
         },
 
-        updatePayment: async (_, { id, paymentInput }) => {
+        updatePayment: async (_, { id, Input }) => {
             const payment = await payment.findById(id);
             if (!payment) {
                 throw new Error("payment not found");
             }
-            categoryChanger(clientInput, paymentInput);
+            categoryChanger(clientInput, Input);
         },
 
         deletePayment: async (_, { id }) => {
