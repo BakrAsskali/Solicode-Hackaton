@@ -19,6 +19,7 @@ export const clientSchema = new Schema({
     },
     status: {
         type: String,
+        default: "Green",
         required: true
     },
     previousStatus: {
