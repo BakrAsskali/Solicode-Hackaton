@@ -23,7 +23,6 @@ const server = new ApolloServer({
 });
 
 const { url } = await startStandaloneServer(server, {
-    context,
     cors: {
         origin: "http://localhost:5173",
         credentials: true

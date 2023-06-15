@@ -20,3 +20,5 @@ export const planPayementSchema = new Schema({
         default: Date.now
     }
 });
+
+export default mongoose.model("PlanPayement", planPayementSchema);

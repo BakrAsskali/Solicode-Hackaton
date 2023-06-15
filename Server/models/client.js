@@ -36,3 +36,5 @@ export const clientSchema = new Schema({
         default: Date.now
     }
 });
+
+export default mongoose.model("Client", clientSchema);

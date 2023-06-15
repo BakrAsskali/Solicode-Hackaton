@@ -38,3 +38,6 @@ export const paymentSchema = new Schema({
         required: true
     },
 });
+
+export default mongoose.model("Payment", paymentSchema);
+

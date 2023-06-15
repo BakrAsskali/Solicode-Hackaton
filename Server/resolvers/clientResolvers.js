@@ -1,4 +1,4 @@
-import { clientSchema } from "../models/client";
+import clientSchema from "../models/client.js";
 
 export const clientResolvers = {
     Query: {
