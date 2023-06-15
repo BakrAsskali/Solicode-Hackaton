@@ -1,3 +1,4 @@
+import { categoryChanger } from "../helpers/categories.js";
 import payment from "../models/payment.js";
 
 export const paymentResolvers = {
@@ -16,7 +17,17 @@ export const paymentResolvers = {
             const payment = new payment({
                 clientId: paymentInput.clientId,
                 amount: paymentInput.amount,
+                method: paymentInput.method,
+                planPayement: paymentInput.planPayement,
+                nbrAPayer: paymentInput.nbrAPayer,
+                paymentDate: paymentInput.paymentDate,
+                subscriptionDate: paymentInput.subscriptionDate,
             });
+            const paymentPlan = new paymentPlan({
+                idClient: paymentInput.clientId,
+                typePlan: paymentInput.planPayement.typePlan,
+            });
+            await paymentPlan.save();
             return await payment.save();
         },
 
@@ -25,9 +36,7 @@ export const paymentResolvers = {
             if (!payment) {
                 throw new Error("payment not found");
             }
-            payment.clientId = paymentInput.clientId;
-            payment.amount = paymentInput.amount;
-            return await payment.save();
+            categoryChanger(clientInput, paymentInput);
         },
 
         deletePayment: async (_, { id }) => {
