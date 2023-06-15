@@ -24,6 +24,7 @@ export const clientSchema = new Schema({
     },
     previousStatus: {
         type: String,
+        default: "Green",
         required: true
     },
     createdAt: {
