@@ -1,10 +1,10 @@
 import { categoryChanger } from "../helpers/categories.js";
-import { paymentSchema } from "../schema/paymentSchema.js";
+import paymentSchema from "../models/payment.js";
 
 export const paymentResolvers = {
     Query: {
         payments: async () => {
-            return await payment.find();
+            return await paymentSchema.find();
         },
 
         payment: async (_, { id }) => {
@@ -13,23 +13,23 @@ export const paymentResolvers = {
     },
 
     Mutation: {
-        createPayment: async (_, { payementInput }) => {
+        createPayment: async (_, { paymentInput }) => {
             const payment = new paymentSchema({
-                clientId: payementInput.clientId,
-                montant: payementInput.amount,
-                modePayement: payementInput.method,
-                planPayement: payementInput.planPayement,
-                nbrPayementSuccess: payementInput.nbrPayementSuccess,
-                nbrdeRetard: payementInput.nbrdeRetard,
-                nbrAPayer: payementInput.nbrAPayer,
-                datePayement: payementInput.paymentDate,
-                subscriptionDate: payementInput.subscriptionDate,
+                clientId: paymentInput.clientId,
+                montant: paymentInput.montant,
+                modePayement: paymentInput.modePayement,
+                planPayement: paymentInput.planPayement,
+                nbrPayementSuccess: paymentInput.nbrPayementSuccess,
+                nbrAPayer: paymentInput.nbrAPayer,
+                nbrdeRetard: paymentInput.nbrdeRetard,
+                datePayement: paymentInput.datePayement,
+                subscriptionDate: paymentInput.subscriptionDate,
             });
             return await payment.save();
         },
 
         updatePayment: async (_, { id, Input }) => {
-            const payment = await payment.findById(id);
+            const payment = await paymentSchema.findById(id);
             if (!payment) {
                 throw new Error("payment not found");
             }
@@ -37,7 +37,7 @@ export const paymentResolvers = {
         },
 
         deletePayment: async (_, { id }) => {
-            const payment = await payment.findById(id);
+            const payment = await paymentSchema.findById(id);
             if (!payment) {
                 throw new Error("payment not found");
             }

@@ -14,7 +14,7 @@ export const paymentSchema = `#graphql
         updatedAt: String!
     }
 
-    input PayementInput {
+    input PaymentInput {
         clientId: String!
         amount: Float!
         method: String!
@@ -32,8 +32,8 @@ export const paymentSchema = `#graphql
     }
 
     type Mutation {
-        createPayment(PayementInput: PayementInput): Payement
-        updatePayment(id: ID!, payementInput: PayementInput): Payement
+        createPayment(PaymentInput: PaymentInput): Payement
+        updatePayment(id: ID!, paymentInput: PaymentInput): Payement
         deletePayment(id: ID!): Payement
     }
 `

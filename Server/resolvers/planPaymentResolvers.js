@@ -1,4 +1,4 @@
-import planPayement from "../models/planPayement.js";
+import planPayementSchema from "../models/planPayement.js";
 
 export const planPayementResolvers = {
     Query: {
@@ -13,7 +13,7 @@ export const planPayementResolvers = {
 
     Mutation: {
         createPlanPayement: async (_, { planPayementInput }) => {
-            const planPayement = new planPayement({
+            const planPayement = new planPayementSchema({
                 clientId: planPayementInput.clientId,
                 typePlan: planPayementInput.typePlan,
             });
@@ -21,17 +21,19 @@ export const planPayementResolvers = {
         },
 
         updatePlanPayement: async (_, { id, planPayementInput }) => {
-            const planPayement = await planPayement.findById(id);
-            if (!planPayement) {
+            const planPayementVerification = await planPayementSchema.findById(id);
+            if (!planPayementVerification) {
                 throw new Error("planPayement not found");
             }
-            planPayement.clientId = planPayementInput.clientId;
-            planPayement.typePlan = planPayementInput.typePlan;
+            const planPayement = new planPayementSchema({
+                clientId: planPayementInput.clientId,
+                typePlan: planPayementInput.typePlan,
+            });
             return await planPayement.save();
         },
 
         deletePlanPayement: async (_, { id }) => {
-            const planPayement = await planPayement.findById(id);
+            const planPayement = await planPayementSchema.findById(id);
             if (!planPayement) {
                 throw new Error("planPayement not found");
             }

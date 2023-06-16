@@ -47,7 +47,7 @@ export const clientResolvers = {
             if (!client) {
                 throw new Error("client not found");
             }
-            await clientSchema.deleteOne({ _id: id });
+            await client.deleteOne({ _id: id });
             return client;
         }
     },
